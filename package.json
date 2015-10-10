@@ -1,0 +1,30 @@
+{
+  "name": "shipit-tasks",
+  "version": "1.0.0",
+  "description": "Just some tasks to help with shipit-deploy",
+  "main": "index.js",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "bluebird": "^2.10.2",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "path2": "^0.1.0",
+    "shipit-deploy": "^2.0.0",
+    "shipit-utils": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackdynamo/shipit-tasks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackdynamo/shipit-tasks/issues"
+  },
+  "homepage": "https://github.com/blackdynamo/shipit-tasks#readme"
+}

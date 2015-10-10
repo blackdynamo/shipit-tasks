@@ -1,0 +1,37 @@
+server {
+    listen  <%= listenTo %>;
+    server_name <%= domains %>;
+
+    <% if(!!secure) { %>
+        ssl on;
+        ssl_certificate <%= certificates.public %>;
+        ssl_certificate_key <%= certificates.private %>;
+        ssl_protocols  SSLv2 SSLv3 TLSv1;
+    <% } %>
+
+    <% _.each(locations, function(location){ %>
+        <% if(location.type === "proxy") { %>
+            location <%= location.name %> {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        	    proxy_set_header Host $http_host;
+        	    proxy_pass <%= location.path %>/;
+        	    proxy_redirect off;
+            }
+        <% } else { %>
+            location <%= location.name %> {
+                <% if(location.directive === "root") { %>
+                    root <%= currentPath %>;
+                <% } else { %>
+                    alias <%= currentPath %>/;
+                <% } %>
+        	    index index.html index.htm;
+            }
+        <% } %>
+    <% }); %>
+
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root  /usr/share/nginx/html;
+    }
+}

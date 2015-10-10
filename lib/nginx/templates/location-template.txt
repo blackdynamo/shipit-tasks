@@ -1,0 +1,18 @@
+<% _.each(locations, function(location){ %>
+    <% if(location.type === "proxy") { %>
+        location <%= location.name %> {
+            proxy_set_header Host $http_host;
+            proxy_pass <%= location.path %>/;
+            proxy_redirect off;
+        }
+    <% } else { %>
+        location <%= location.name %> {
+            <% if(location.directive === "root") { %>
+                root <%= currentPath %>;
+            <% } else { %>
+                alias <%= currentPath %>/;
+            <% } %>
+            index index.html index.htm;
+        }
+    <% } %>
+<% }); %>
